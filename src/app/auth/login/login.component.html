@@ -1,29 +1,34 @@
-<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 
-  <div>
-    <label for="email">Email</label>
-    <input type="email" id="email" placeholder="Email" formControlName="email" required>
-    <div *ngIf="form_email.invalid && (form_email.dirty || form_email.touched)">
-      <ul>
-        <li *ngIf="form_email.errors.required">Email is required!</li>
-        <li *ngIf="form_email.errors.email">Must be a valid email</li>
-      </ul>
-    </div>
-  </div>
+<div>
+  <mat-grid-list cols="1" rowHeight="6:1">
 
-  <div>
-    <label for="password">Password</label>
-    <input type="password" id="password" placeholder="Password" formControlName="password" required minlength="8">
-    <div *ngIf="form_password.invalid && (form_password.dirty || form_password.touched)">
-      <ul>
-        <li *ngIf="form_password.errors.required">Password is required</li>
-        <li *ngIf="form_password.errors.minlength">Must be at least 8 characters</li>
-      </ul>
-    </div>
-  </div>
+    <mat-grid-tile>
+      <h1>Welcome to Trello clone!</h1>
+    </mat-grid-tile>
 
-  <button type="submit" [disabled]="!loginForm.valid">
-    Submit
-  </button>
+    <mat-grid-tile>
+      <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="login-form">
 
-</form>
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" formControlName="email" required>
+          <mat-error *ngIf="form_email.invalid && form_email.errors.required">Email is required!</mat-error>
+          <mat-error *ngIf="form_email.invalid && form_email.errors.email">Must be a valid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" minlength="8" required>
+          <mat-error *ngIf="form_password.invalid && form_password.errors.required">Password is required</mat-error>
+          <mat-error *ngIf="form_password.invalid && form_password.errors.minlength">Must be at least 8 characters</mat-error>
+        </mat-form-field>
+        
+        <div class="button-container">
+          <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
+            Submit
+          </button>
+        </div>
+
+      </form>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

@@ -1,0 +1,14 @@
+.login-form {
+  min-width: 200px;
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.button-container {
+  text-align: right;
+}
