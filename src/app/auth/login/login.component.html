@@ -1,16 +1,28 @@
-<form>
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 
   <div>
     <label for="email">Email</label>
-    <input type="email" id="email" placeholder="Email" [(ngModel)]="email" name="email">
+    <input type="email" id="email" placeholder="Email" formControlName="email" required>
+    <div *ngIf="form_email.invalid && (form_email.dirty || form_email.touched)">
+      <ul>
+        <li *ngIf="form_email.errors.required">Email is required!</li>
+        <li *ngIf="form_email.errors.email">Must be a valid email</li>
+      </ul>
+    </div>
   </div>
 
   <div>
     <label for="password">Password</label>
-    <input type="password" id="password" placeholder="Password" [(ngModel)]="password" name="password">
+    <input type="password" id="password" placeholder="Password" formControlName="password" required minlength="8">
+    <div *ngIf="form_password.invalid && (form_password.dirty || form_password.touched)">
+      <ul>
+        <li *ngIf="form_password.errors.required">Password is required</li>
+        <li *ngIf="form_password.errors.minlength">Must be at least 8 characters</li>
+      </ul>
+    </div>
   </div>
 
-  <button type="button" (click)="submitForm()">
+  <button type="submit" [disabled]="!loginForm.valid">
     Submit
   </button>
 
